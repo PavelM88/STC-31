@@ -12,11 +12,16 @@ public class Person {
         this.name = name;
         this.sex = sex;
     }
-   public enum Sex {
+
+    public Person() {
+
+    }
+
+    public enum Sex {
         MAN,
         WOMAN
     }
-    
+
 
     public int getAge() {
         return age;
