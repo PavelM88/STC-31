@@ -3,6 +3,11 @@ package part1.lesson02.task03;
 import java.util.Arrays;
 import java.util.Comparator;
 
+/** Сортировка массива по полу, возрасту, алфавиту, с помощью Comparator
+ * первые идут мужчины
+ * выше в списке тот, кто более старший
+ * имена сортируются по алфавиту
+ */
 public class CompSort implements Sorting, Comparator<Person> {
     public void sort(Person[] people) {
         Arrays.sort(people, new Comparator<Person>() {

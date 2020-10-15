@@ -1,36 +1,28 @@
 package part1.lesson02.task03;
 
 
+/**Сортировка массива пузырьком по полу, возрасту, алфавиту.
+ * первые идут мужчины
+ * выше в списке тот, кто более старший
+ * имена сортируются по алфавиту
+ */
+
 public class BubbleSort implements Sorting {
 
     public void sort(final Person[] person) {
-        boolean isSorted = false;
         Person p1;
-        while (!isSorted) {
-            isSorted = true;
-            for (int i = 0; i < person.length - 1; i++) {
-                p1 = person[i];
-                int age = person[i].getAge();
-                int ageNext = person[i + 1].getAge();
-                if (age < ageNext) {
-                    isSorted = false;
-
-                    person[i] = person[i + 1];
-                    person[i + 1] = p1;
+        for (int i = 0; i < person.length - 1; i++) {
+            for (int j = person.length - 1; j > i; j--) {
+                if (person[j].compareTo(person[j-1]) < 0) {
+                    p1 = person[j - 1];
+                    person[j - 1] = person[j];
+                    person[j] = p1;
                 }
-
-            }
-        }
-        for (Person item : person) {
-            if (item.getSex() == Person.Sex.MAN) {
-                System.out.println(item);
-            }
-        }
-        for (Person value : person) {
-            if (value.getSex() == Person.Sex.WOMAN) {
-                System.out.println(value);
             }
         }
     }
 }
+    
+
+
 
