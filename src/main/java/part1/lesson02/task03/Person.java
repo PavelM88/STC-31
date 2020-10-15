@@ -1,7 +1,8 @@
 package part1.lesson02.task03;
 
-public class Person {
-    private int age;
+
+public class Person implements Comparable<Person> {
+    private Integer age;
     private String name;
     private Sex sex;
 
@@ -13,15 +14,17 @@ public class Person {
         this.sex = sex;
     }
 
-    public Person() {
-
+    public int compareTo(Person o) {
+        int a = sex.compareTo(o.getSex());
+        if (a != 0) {
+            return a;
+        }
+        a = age.compareTo(o.getAge());
+        if (a != 0) {
+            return a;
+        }
+        return name.compareTo(o.getName());
     }
-
-    public enum Sex {
-        MAN,
-        WOMAN
-    }
-
 
     public int getAge() {
         return age;
@@ -53,4 +56,5 @@ public class Person {
     public String toString() {
         return getName() + " " + getAge() + " " + getSex();
     }
+
 }
