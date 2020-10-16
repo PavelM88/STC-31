@@ -7,6 +7,7 @@ public class Person implements Comparable<Person> {
     private Sex sex;
 
     public Person(int age, String name, Sex sex) {
+//        Проверка на возраст. Возраст не может быть меньше 0 и больше 100
         if (age >= 0 && age <= 100) {
             this.age = age;
         }
@@ -15,15 +16,15 @@ public class Person implements Comparable<Person> {
     }
 
     public int compareTo(Person o) {
-        int a = sex.compareTo(o.getSex());
+        int a = age.compareTo(o.getAge());
         if (a != 0) {
             return a;
         }
-        a = age.compareTo(o.getAge());
-        if (a != 0) {
+        a = name.compareTo(o.getName());
+        if (a <= 0) {
             return a;
         }
-        return name.compareTo(o.getName());
+        return sex.compareTo(o.getSex());
     }
 
     public int getAge() {

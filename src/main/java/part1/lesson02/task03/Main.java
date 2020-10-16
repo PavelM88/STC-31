@@ -33,9 +33,6 @@ public class Main {
         BubbleSort bubbleSort = new BubbleSort();
         long startTime1 = System.nanoTime();
         bubbleSort.sort(arraysPerson);
-        for (Person p : arraysPerson) {
-            System.out.println(p);
-        }
         System.out.println("Время работы: " + (System.nanoTime() - startTime1));
 
     }
