@@ -17,7 +17,7 @@ public class Main {
             arraysPerson[9] = new Person(30, "Dasha", Sex.WOMAN);
             arraysPerson[10] = new Person(47, "Bob", Sex.MAN);
             arraysPerson[11] = new Person(37, "Dandi", Sex.MAN);
-            arraysPerson[12] = new Person(35,"Britni",Sex.WOMAN);
+            arraysPerson[12] = new Person(35, "Britni", Sex.WOMAN);
             arraysPerson[i] = new Person(60, "Linht", Sex.WOMAN);
         }
 
