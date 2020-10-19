@@ -1,7 +1,7 @@
 package part1.lesson02.task03;
 
 
-public class Person implements Comparable<Person> {
+public class Person {
     private Integer age;
     private String name;
     private Sex sex;
@@ -15,17 +15,6 @@ public class Person implements Comparable<Person> {
         this.sex = sex;
     }
 
-    public int compareTo(Person o) {
-        int a = age.compareTo(o.getAge());
-        if (a != 0) {
-            return a;
-        }
-        a = name.compareTo(o.getName());
-        if (a <= 0) {
-            return a;
-        }
-        return sex.compareTo(o.getSex());
-    }
 
     public int getAge() {
         return age;

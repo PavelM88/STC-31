@@ -20,7 +20,7 @@ public class Main {
             arraysPerson[12] = new Person(35, "Britni", Sex.WOMAN);
             arraysPerson[i] = new Person(60, "Linht", Sex.WOMAN);
         }
-
+        System.out.println("Compare sort: ");
         CompSort compSort = new CompSort();
         long startTime = System.nanoTime();
         compSort.sort(arraysPerson);
@@ -29,10 +29,13 @@ public class Main {
         for (Person person : arraysPerson) {
             System.out.println(person);
         }
-
+        System.out.println("Bubble sort: ");
         BubbleSort bubbleSort = new BubbleSort();
         long startTime1 = System.nanoTime();
         bubbleSort.sort(arraysPerson);
+        for (Person p1 : arraysPerson) {
+            System.out.println(p1);
+        }
         System.out.println("Время работы: " + (System.nanoTime() - startTime1));
 
     }

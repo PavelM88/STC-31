@@ -12,23 +12,33 @@ public class BubbleSort implements Sorting {
 
     public void sort(final Person[] person) {
         Person p1;
+
         for (int i = 0; i < person.length - 1; i++) {
             for (int j = person.length - 1; j > i; j--) {
-                if (person[j].compareTo(person[j - 1]) > 0) {
+//                Сравненние по полу поле sex;
+                if (person[j - 1].getSex().compareTo(person[j].getSex()) > 0) {
                     p1 = person[j - 1];
                     person[j - 1] = person[j];
                     person[j] = p1;
                 }
-            }
-        }
-        for (Person persMan : person) {
-            if (persMan.getSex().equals(Sex.MAN)) {
-                System.out.println(persMan);
-            }
-        }
-        for (Person persWoman : person) {
-            if (persWoman.getSex().equals(Sex.WOMAN)) {
-                System.out.println(persWoman);
+//                Если поле sex равны, то сравниваем по возрасту
+                if (person[j - 1].getSex().compareTo(person[j].getSex()) == 0) {
+                    if (person[j - 1].getAge() < person[j].getAge()) {
+                        p1 = person[j - 1];
+                        person[j - 1] = person[j];
+                        person[j] = p1;
+                    }
+                }
+//                Если пол, возраст равны, то сортируем по алфавиту
+                if (person[j - 1].getSex().compareTo(person[j].getSex()) == 0) {
+                    if (person[j - 1].getAge() == person[j].getAge()) {
+                        if (person[j - 1].getName().compareTo(person[j].getName()) > 0) {
+                            p1 = person[j - 1];
+                            person[j - 1] = person[j];
+                            person[j] = p1;
+                        }
+                    }
+                }
             }
         }
     }
