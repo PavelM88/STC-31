@@ -1,7 +1,7 @@
 package part1.lesson02.task03;
 
 
-public class Person {
+public class Person implements Comparable<Person> {
     private Integer age;
     private String name;
     private Sex sex;
@@ -47,4 +47,25 @@ public class Person {
         return getName() + " " + getAge() + " " + getSex();
     }
 
+
+    @Override
+    public int compareTo(Person o) {
+        // Сравненние по полу поле sex
+        if (this.sex.compareTo(o.getSex()) > 0) {
+            return 1;
+        }
+        // Если поле sex равны, то сравниваем по возрасту
+        if (this.sex.compareTo(o.getSex()) == 0) {
+            if (this.age.compareTo(o.getAge()) < 0) {
+                return 1;
+            }
+        }
+        // Если пол, возраст равны, то сортируем по алфавиту
+        if (this.age.compareTo(o.getAge()) == 0) {
+            if (this.name.compareTo(o.getName()) > 0) {
+                return 1;
+            }
+        }
+        return 0;
+    }
 }

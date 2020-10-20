@@ -29,10 +29,12 @@ public class Main {
         for (Person person : arraysPerson) {
             System.out.println(person);
         }
+
         System.out.println("Bubble sort: ");
         BubbleSort bubbleSort = new BubbleSort();
         long startTime1 = System.nanoTime();
         bubbleSort.sort(arraysPerson);
+
         for (Person p1 : arraysPerson) {
             System.out.println(p1);
         }
