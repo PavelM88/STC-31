@@ -17,11 +17,13 @@ public class TestMain {
         MathBox mathBox = new MathBox(new Number[]{1, 34, 33.5});
         mathBox.addObject(i);
         System.out.println(mathBox.toString());
+        System.out.print("Сумма чисел: ");
         System.out.println(mathBox.summator());
+        System.out.print("Удаление элемента из коллекции: ");
         mathBox.removeElement(1);
-        mathBox.splitter(2);
         System.out.println(mathBox.toString());
+        System.out.print("Деление элементов коллекции: ");
+        mathBox.splitter(3 );
         mathBox.addObject(str);
-        System.out.println(mathBox.toString());
     }
 }

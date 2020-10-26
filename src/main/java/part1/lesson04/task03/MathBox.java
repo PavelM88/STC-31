@@ -1,8 +1,10 @@
 package part1.lesson04.task03;
 
-import java.util.ListIterator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class MathBox<T extends Number> extends ObjectBox {
+public class MathBox extends ObjectBox {
 
 
     public MathBox(Number[] number) throws Exception {
@@ -13,22 +15,21 @@ public class MathBox<T extends Number> extends ObjectBox {
 
     public Number summator() {
         double sum = 0.0;
-        for (Number number : (Iterable<Number>) getObjects()) {
+        for (Object number : getObjects()) {
             if (number != null) {
-                sum += number.doubleValue();
+                sum +=((Number) number).doubleValue();
             }
         }
         return sum;
     }
 
     public void splitter(Integer divide) {
-        ListIterator iterator = getObjects().listIterator();
-        while (iterator.hasNext()) {
-            Number number = (Number) iterator.next();
-            if (number != null) {
-                iterator.set(number.doubleValue() / divide);
-            }
+        if (divide == 0) throw new ArithmeticException("Делить на ноль нельзя!");
+        List<Object> result = new ArrayList<>();
+        for (Object o : getObjects()) {
+            result.addAll(Collections.singleton(((Number) o).doubleValue() / divide));
         }
+        System.out.println(result.toString());
     }
 
     public void removeElement(Integer delete) {
