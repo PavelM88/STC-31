@@ -1,14 +1,13 @@
 package part1.lesson04.task03;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class MathBox extends ObjectBox {
+public class MathBox<T extends Number> extends ObjectBox<T> {
 
 
-    public MathBox(Number[] number) throws Exception {
-        for (Number num : number) {
+    public MathBox(T[] number) throws Exception {
+        for (T num : number) {
             addObject(num);
         }
     }
@@ -17,31 +16,31 @@ public class MathBox extends ObjectBox {
         double sum = 0.0;
         for (Object number : getObjects()) {
             if (number != null) {
-                sum +=((Number) number).doubleValue();
+                sum += ((Number) number).doubleValue();
             }
         }
         return sum;
     }
 
-    public void splitter(Integer divide) {
-        if (divide == 0) throw new ArithmeticException("Делить на ноль нельзя!");
-        List<Object> result = new ArrayList<>();
-        for (Object o : getObjects()) {
-            result.addAll(Collections.singleton(((Number) o).doubleValue() / divide));
+    public void splitter(T divide) {
+        if (divide.intValue() == 0) throw new ArithmeticException("Делить на ноль нельзя!");
+        List<Double> result = new ArrayList<>();
+        for (T o : getObjects()) {
+            result.add(o.doubleValue() / divide.doubleValue());
         }
         System.out.println(result.toString());
     }
 
-    public void removeElement(Integer delete) {
-        deleteObject(delete);
+    public void removeElement(T delete) {
+        super.deleteObject(delete);
     }
 
 
     @Override
-    public void addObject(Object obj) throws Exception {
-        if (obj instanceof Number) {
+    public void addObject(T obj) throws Exception {
+        if (obj != null) {
             super.addObject(obj);
-        } else throw new Exception(obj + "-Объект не является экземпляром класса Number!");
+        } else throw new Exception("-Объект не является экземпляром класса Number!");
     }
 
     @Override

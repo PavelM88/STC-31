@@ -6,7 +6,7 @@ public class TestMain {
         int i = 123;
 
         System.out.println("---ObjectBox---");
-        ObjectBox box = new ObjectBox();
+        ObjectBox<Object> box = new ObjectBox<>();
         box.addObject(str);
         box.addObject(i);
         System.out.println(box.dump());
@@ -14,7 +14,7 @@ public class TestMain {
         System.out.println(box.dump());
 
         System.out.println("---MathBox---");
-        MathBox mathBox = new MathBox(new Number[]{1, 34, 33.5});
+        MathBox<Number> mathBox = new MathBox<>(new Number[]{1, 34, 33.5});
         mathBox.addObject(i);
         System.out.println(mathBox.toString());
         System.out.print("Сумма чисел: ");
@@ -24,6 +24,5 @@ public class TestMain {
         System.out.println(mathBox.toString());
         System.out.print("Деление элементов коллекции: ");
         mathBox.splitter(3 );
-        mathBox.addObject(str);
     }
 }
