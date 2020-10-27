@@ -23,6 +23,6 @@ public class TestMain {
         mathBox.removeElement(1);
         System.out.println(mathBox.toString());
         System.out.print("Деление элементов коллекции: ");
-        mathBox.splitter(3 );
+        mathBox.splitter(3);
     }
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 public class MathBox<T extends Number> extends ObjectBox<T> {
 
-
     public MathBox(T[] number) throws Exception {
         for (T num : number) {
             addObject(num);
