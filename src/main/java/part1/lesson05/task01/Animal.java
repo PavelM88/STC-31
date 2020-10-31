@@ -3,12 +3,22 @@ package part1.lesson05.task01;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Класс Животные
+ */
 public class Animal implements Comparable<Animal> {
     private UUID id;
     private String animalName;
     private AnimalOwner person;
     private Integer weight;
 
+    /**
+     * Конструктор класса
+     *
+     * @param animalName-кличка животного
+     * @param person-хозяин
+     * @param weight-вес
+     */
     public Animal(String animalName, AnimalOwner person, int weight) {
         this.id = UUID.randomUUID();
         this.animalName = animalName;
@@ -73,7 +83,11 @@ public class Animal implements Comparable<Animal> {
                 '}';
     }
 
-
+    /**
+     * Сортировка животных. Хозяин, кличка животного, вес.
+     *
+     * @param o входной параметр
+     */
     @Override
     public int compareTo(Animal o) {
         int compare = getPerson().compareTo(o.getPerson());

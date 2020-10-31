@@ -2,11 +2,21 @@ package part1.lesson05.task01;
 
 import java.util.Objects;
 
+/**
+ * класс Хозяин.
+ */
 public class AnimalOwner implements Comparable<AnimalOwner> {
     private String name;
     private Integer age;
     private SexPerson sex;
 
+    /**
+     * Конструктор
+     *
+     * @param name-имя
+     * @param age-возраст
+     * @param sex-пол
+     */
     public AnimalOwner(String name, int age, SexPerson sex) {
         this.name = name;
         if (age >= 0 && age <= 100) {
@@ -63,6 +73,13 @@ public class AnimalOwner implements Comparable<AnimalOwner> {
                 '}';
     }
 
+    /**
+     * переопределенный метод compareTo, для сортировки экземпляров класса
+     * по полу, возрасту, имени. Первыми идут мужчины, первый в списке тот кто старше,
+     * имена по алфавиту если пол и возраст одинаковы.
+     *
+     * @param o входной параметр
+     */
     @Override
     public int compareTo(AnimalOwner o) {
         int comp = getSex().compareTo(o.getSex());
