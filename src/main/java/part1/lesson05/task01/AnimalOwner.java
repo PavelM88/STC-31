@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * класс Хозяин.
  */
-public class AnimalOwner implements Comparable<AnimalOwner> {
+public class AnimalOwner {
     private String name;
     private Integer age;
     private SexPerson sex;
@@ -71,24 +71,5 @@ public class AnimalOwner implements Comparable<AnimalOwner> {
                 ", age=" + age +
                 ", sex=" + sex +
                 '}';
-    }
-
-    /**
-     * переопределенный метод compareTo, для сортировки экземпляров класса
-     * по полу, возрасту, имени. Первыми идут мужчины, первый в списке тот кто старше,
-     * имена по алфавиту если пол и возраст одинаковы.
-     *
-     * @param o входной параметр
-     */
-    @Override
-    public int compareTo(AnimalOwner o) {
-        int comp = getSex().compareTo(o.getSex());
-        if (comp == 0) {
-            comp = o.getAge().compareTo(getAge());
-        }
-        if (comp == 0) {
-            comp = getName().compareTo(o.getName());
-        }
-        return comp;
     }
 }

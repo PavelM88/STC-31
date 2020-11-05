@@ -6,8 +6,8 @@ import java.util.UUID;
 /**
  * Класс Животные
  */
-public class Animal implements Comparable<Animal> {
-    private UUID id;
+public class Animal {
+    private String id = UUID.randomUUID().toString();
     private String animalName;
     private AnimalOwner person;
     private Integer weight;
@@ -20,17 +20,17 @@ public class Animal implements Comparable<Animal> {
      * @param weight-вес
      */
     public Animal(String animalName, AnimalOwner person, int weight) {
-        this.id = UUID.randomUUID();
         this.animalName = animalName;
         this.person = person;
         this.weight = weight;
     }
 
-    public UUID getId() {
+
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -81,22 +81,5 @@ public class Animal implements Comparable<Animal> {
                 ", person=" + person +
                 ", weight=" + weight +
                 '}';
-    }
-
-    /**
-     * Сортировка животных. Хозяин, кличка животного, вес.
-     *
-     * @param o входной параметр
-     */
-    @Override
-    public int compareTo(Animal o) {
-        int compare = getPerson().compareTo(o.getPerson());
-        if (compare == 0) {
-            compare = getAnimalName().compareTo(o.getAnimalName());
-        }
-        if (compare == 0) {
-            compare = getWeight().compareTo(o.getWeight());
-        }
-        return compare;
     }
 }
