@@ -5,6 +5,9 @@ import java.nio.charset.StandardCharsets;
 
 
 public class Main {
+    /**
+     * Чтение файла и запись в другой файл в кодировке UTF-16
+     */
     public static void main(String[] args) {
         String filePath = "D:\\stc-31\\src\\main\\java\\part1\\lesson07\\bonus\\encoding.txt";
         String newPath = "D:\\stc-31\\src\\main\\java\\part1\\lesson07\\bonus\\NewEncoding.txt";
