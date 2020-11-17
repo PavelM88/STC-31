@@ -9,19 +9,12 @@ public class AnimalService implements Comparator<Map.Entry<String, Animal>> {
      * Метод добавления животных
      *
      * @param animal объект класса Animal.
-     * @throws Exception выкидывает исключение, если есть дубликат добавляемого животного
      */
-    public void addAnimal(Animal animal) throws Exception {
-        Map<String, Animal> map = new HashMap<>();
-        map.put(animal.getId(), animal);
-        Set<String> animals = new HashSet<>();
-        for (Animal an : map.values()) {
-            animals.add(an.toString());
-        }
-        if (map.size() > animals.size()) {
-            throw new Exception("Дубликат");
-        } else if (map.size() == animals.size()) {
-            animalMap.putAll(map);
+    public void addAnimal(Animal animal) {
+        if (!animalMap.containsValue(animal)) {
+            animalMap.put(animal.getId(), animal);
+        } else {
+            System.out.println("Дубликат! " + animal.toString());
         }
 
     }
@@ -35,7 +28,8 @@ public class AnimalService implements Comparator<Map.Entry<String, Animal>> {
         Set<Map.Entry<String, Animal>> entrySet = animalMap.entrySet();
         for (Map.Entry<String, Animal> entry : entrySet) {
             if (name.equals(entry.getValue().getAnimalName())) {
-                System.out.println(entry.getValue().toString());
+                System.out.println("Результат поиска по кличке: " + name);
+                System.out.println(entry.getValue().toString() + "\n");
             }
         }
     }
