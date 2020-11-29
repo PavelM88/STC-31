@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="debug" name="Main" packages="">
+    <Appenders>
+        <File name="LogFile" filename="mainTask22Slf4j.log">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="10" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+        </File>
+        <Console name="stdout" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d [%p] %c %m%n"/>
+        </Console>
+        <JDBC name="DBlog" tableName="logs">
+            <DriverManager connectionString="jdbc:postgresql://localhost:5432/stc31jdbc"  driverClassName="org.postgresql.Driver"
+                           username="postgres"  password="1988" />
+            <Column name="id" pattern="%u" isUnicode="false"/>
+            <Column name="date" isEventTimestamp="true" isUnicode="false" />
+            <Column name="logger" pattern="%logger" isUnicode="false"/>
+            <Column name="log_level" pattern="%level" isUnicode="false"/>
+            <Column name="message" pattern="%m" isUnicode="false"/>
+            <Column name="exception" pattern="%throwable " isUnicode="false"/>
+        </JDBC>
+    </Appenders>
+    <Loggers>
+        <Root level="trace">
+            <AppenderRef ref="stdout" level="INFO"/>
+            <AppenderRef ref="LogFile" level="DEBUG"/>
+        </Root>
+        <Logger name="part1.lesson19.ConnectorDB" level="info" additivity="false">
+            <AppenderRef ref="DBlog" level="INFO"/>
+        </Logger>
+    </Loggers>
+</Configuration>

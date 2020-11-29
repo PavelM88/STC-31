@@ -1,10 +1,19 @@
 package part1.lesson19;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.*;
 
+
 public class Main {
+    private static Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws SQLException {
+
+        logger.info("Start Main class");
+
         Connection connection = ConnectorDB.getConnect();
         ConnectorDB.getDropTable(connection);
         ConnectorDB.createTable(connection);
@@ -23,7 +32,7 @@ public class Main {
      * @throws SQLException
      */
     public static void parameterizedQuery(Connection connection) throws SQLException {
-        System.out.println("параметризованный запрос:");
+        logger.info("Параметризованный запрос");
         String sql = "select  id, nickname, age from animal where age = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, 5);
@@ -33,7 +42,7 @@ public class Main {
             String table = "id = " + rs.getInt("id") + "\t" +
                     "nickname = " + rs.getString("nickname") + "\t"
                     + "age = " + rs.getInt("age");
-            System.out.println(table);
+            logger.info(table);
         }
     }
 
@@ -44,7 +53,7 @@ public class Main {
      * @throws SQLException
      */
     public static void batching(Connection connection) throws SQLException {
-        System.out.println("Батчинг:");
+        logger.info("Батчинг");
         Statement statement = connection.createStatement();
 
         String insertSql1 = "insert into animal values (4, 'Bobik', 8)";
@@ -61,7 +70,7 @@ public class Main {
             String table = "id = " + resultSet.getInt("id") + "\t" +
                     "nickname = " + resultSet.getString("nickname") + "\t" +
                     "age = " + resultSet.getInt("age");
-            System.out.println(table);
+            logger.info(table);
         }
     }
 
@@ -72,7 +81,7 @@ public class Main {
      * @throws SQLException
      */
     public static void manualTransaction(Connection connection) throws SQLException {
-        System.out.println("Ручное управление транзакциями.");
+        logger.info("Ручное управление транзакциями.");
         connection.setAutoCommit(false);
         String updateSql = "UPDATE person SET age = ? WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(updateSql);
@@ -86,11 +95,12 @@ public class Main {
 
     /**
      * использование savepoint при выполнении логики из нескольких запросов
+     *
      * @param connection входной параметр подключения
      * @throws SQLException
      */
     public static void savepoint(Connection connection) throws SQLException {
-        System.out.println("Использование savepoint.");
+        logger.info("Использование savepoint.");
         connection.setAutoCommit(false);
         Savepoint savepoint = connection.setSavepoint();
 
@@ -113,11 +123,13 @@ public class Main {
     }
 
     /**
-     *  rollback операций при ошибках
+     * rollback операций при ошибках
+     *
      * @param connection входной параметр подключения
      * @throws SQLException
      */
     public static void rollbackOperations(Connection connection) throws SQLException {
+        logger.info("Rollback операции при ошибках.");
         try {
             connection.setAutoCommit(false);
             String deleteSQL = "DELETE FROM person WHERE id = ?";
@@ -135,6 +147,7 @@ public class Main {
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.error("rollbackOperations: " + e);
             connection.rollback();
         }
     }

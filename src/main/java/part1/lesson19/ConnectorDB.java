@@ -1,5 +1,8 @@
 package part1.lesson19;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,11 +22,13 @@ public class ConnectorDB {
      * @return соединение с БД.
      * @throws SQLException выбрасывается исключение если нет подключения к БД.
      */
+    private static Logger logger = LoggerFactory.getLogger(ConnectorDB.class);
     public static Connection getConnect() throws SQLException {
         String url = "jdbc:postgresql://localhost:5432/stc31jdbc";
+        logger.trace("Подключение к " + url);
         String username = "postgres";
         String password = "1988";
-        System.out.println("Соединение с БД.");
+        logger.info("Соединение с БД.");
         return DriverManager.getConnection(url, username, password);
     }
 
@@ -40,7 +45,9 @@ public class ConnectorDB {
                     "D:\\stc-31\\src\\main\\java\\part1\\lesson19\\CreateTable.sql")).lines()
                     .collect(Collectors.joining("\n"));
             statement.executeUpdate(sql);
+            logger.info(sql);
         } catch (SQLException | FileNotFoundException e) {
+            logger.error("createTable: " + e );
             e.printStackTrace();
         }
     }
@@ -58,6 +65,7 @@ public class ConnectorDB {
             statement.executeUpdate(sql);
         } catch (SQLException | FileNotFoundException e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
@@ -74,6 +82,7 @@ public class ConnectorDB {
             statement.executeUpdate(sql);
         } catch (SQLException | FileNotFoundException e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 }
