@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * Создания и наполнения таблицы данными.
  * Удаление таблиц с БД.
  */
-public class ConnectorDB {
+public class ConnectorDB implements ConnectionDB {
 
     /**
      * Метод для подключения к БД.
@@ -23,13 +23,26 @@ public class ConnectorDB {
      * @throws SQLException выбрасывается исключение если нет подключения к БД.
      */
     private static Logger logger = LoggerFactory.getLogger(ConnectorDB.class);
-    public static Connection getConnect() throws SQLException {
-        String url = "jdbc:postgresql://localhost:5432/stc31jdbc";
-        logger.trace("Подключение к " + url);
-        String username = "postgres";
-        String password = "1988";
-        logger.info("Соединение с БД.");
-        return DriverManager.getConnection(url, username, password);
+
+    //    public static Connection getConnect() throws SQLException {
+//        String url = "jdbc:postgresql://localhost:5432/stc31jdbc";
+//        logger.trace("Подключение к " + url);
+//        String username = "postgres";
+//        String password = "1988";
+//        logger.info("Соединение с БД.");
+//        return DriverManager.getConnection(url, username, password);
+//    }
+    @Override
+    public Connection getConnection() {
+        Connection connection = null;
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/stc31jdbc",
+                    "postgres", "1988");
+        } catch (ClassNotFoundException | SQLException e) {
+            logger.error("Ошибка в методе getConnection: " + e);
+        }
+        return connection;
     }
 
     /**
@@ -47,7 +60,7 @@ public class ConnectorDB {
             statement.executeUpdate(sql);
             logger.info(sql);
         } catch (SQLException | FileNotFoundException e) {
-            logger.error("createTable: " + e );
+            logger.error("createTable: " + e);
             e.printStackTrace();
         }
     }
